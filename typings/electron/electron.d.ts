@@ -14,7 +14,7 @@ declare module "browser-window" {
 }
 
 declare module "ipc" {
-	var ipc: any;
+	var ipc: Electron.Ipc;
 
 	export = ipc;
 }
@@ -217,5 +217,11 @@ declare module Electron {
 		insertCSS(css: string): void;
 		executeJavaScript(code: string): void;
 		send(channel: string, ...args: any[]): void;
+	}
+
+	export interface Ipc extends EventEmitter{
+		send(channel: string, ...args: any[]):void;
+		sendSync(channel: string, ...args: any[]): void;
+		sendToHost(channel: string, ...args: any[]): void;
 	}
 }
